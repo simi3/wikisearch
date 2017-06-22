@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+
+<HTML>
+	<head>
+		<meta charset="utf-8">
+
+		<title>Wikipedia search</title>
+
+
+	<style>
+
+		body {
+			background-image: url("img/Background_image.png");
+			background-size: cover;
+			background-repeat: no-repeat;
+
+		}
+
+		input {
+			width: 600px;
+			font-size: 24px;
+			background-color: white;
+			padding: 8px 10px;
+			color: #E0E0E0;
+		}
+
+	</style>	
+
+	</head>
+	
+	<body>
+		
+		<input type="text" placeholder="What do you want to learn about?">
+
+		<a href="https://en.wikipedia.org/wiki/Special:Random"> Stuck? Go to a random article</a>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	</body>	
+
+	<script type="text/javascript">
+
+	$(document).ready(function() {
+
+	// xhr.setRequestHeader( 'Api-User-Agent', 'Example/1.0' );
+
+	function getArticles() {
+		$.getJSON("https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=Albert%20Einstein&format=json&origin=*", function(a) {
+		console.log(a);
+	});	
+	}
+	getArticles();
+
+		// When press enter, submit input
+		// Move input field to top of screen
+		// TAKE INPUT BOX CONTENT AND add an underscore instead of spaces
+		// Send input box content as search string to wikipedia api
+		// Return object with excerpts of (10?) results
+		// Use forEach to loop through the object
+		// Add each as a div inside a parent div
+		// Make the template div link each to a URL of the article using https://en.wikipedia.org/wiki/ and name of article
+
+	});
+
+
+	</script>
+
+</HTML>	
