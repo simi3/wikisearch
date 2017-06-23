@@ -21,8 +21,13 @@
 			font-size: 24px;
 			background-color: white;
 			padding: 8px 10px;
+			
+		}
+
+		input::placeholder {
 			color: #E0E0E0;
 		}
+		
 
 	</style>	
 
@@ -30,7 +35,7 @@
 	
 	<body>
 		
-		<input type="text" placeholder="What do you want to learn about?">
+		<input type="text" id="search" placeholder="What do you want to learn about?">
 
 		<a href="https://en.wikipedia.org/wiki/Special:Random"> Stuck? Go to a random article</a>
 
@@ -40,15 +45,34 @@
 
 	<script type="text/javascript">
 
-	$(document).ready(function() {
+	// $(document).ready(function() {
 
 	// xhr.setRequestHeader( 'Api-User-Agent', 'Example/1.0' );
 
-	function getArticles() {
-		$.getJSON("https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=Albert%20Einstein&format=json&origin=*", function(a) {
-		console.log(a);
-	});	
+
+	// Function to replace spaces with underscores 
+
+	var searchTerm = "Albert Einstein";
+
+	function spaceUnderscore() {
+		searchTerm = searchTerm.split(' ').join('%20');
+		console.log(searchTerm);
+
 	}
+
+	spaceUnderscore();
+
+	var sendToWiki = spaceUnderscore();
+
+	function getArticles() {
+		// searchTerm = document.getElementById("search").select();
+
+		$.getJSON("https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=" + sendToWiki + "&format=json&origin=*", function(a) {		
+
+		console.log(a);
+		});	
+	}
+	
 	getArticles();
 
 		// When press enter, submit input
@@ -60,7 +84,7 @@
 		// Add each as a div inside a parent div
 		// Make the template div link each to a URL of the article using https://en.wikipedia.org/wiki/ and name of article
 
-	});
+	// });
 
 
 	</script>
