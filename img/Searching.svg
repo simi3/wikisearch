@@ -1,0 +1,18 @@
+<svg width="60" height="60" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Frame</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-373 -787)">
+<clipPath id="clip-0" clip-rule="evenodd">
+<path d="M 373 787L 433 787L 433 847L 373 847L 373 787Z" fill="#FFFFFF"/>
+</clipPath>
+<g id="Frame" clip-path="url(#clip-0)">
+<path d="M 373 787L 433 787L 433 847L 373 847L 373 787Z" fill="#FFFFFF"/>
+<g id="Vector (Stroke)">
+<use xlink:href="#path0_fill" transform="translate(386 800)" fill="#D38334"/>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_fill" fill-rule="evenodd" d="M 0 15.5556C 0 6.96446 6.96446 0 15.5556 0C 24.1467 0 31.1111 6.96446 31.1111 15.5556C 31.1111 19.1503 29.8918 22.4602 27.8442 25.0943L 34.4305 31.6806C 35.1898 32.44 35.1898 33.6711 34.4305 34.4305C 33.6711 35.1898 32.44 35.1898 31.6806 34.4305L 25.0943 27.8442C 22.4602 29.8918 19.1503 31.1111 15.5556 31.1111C 6.96446 31.1111 0 24.1467 0 15.5556ZM 15.5556 3.88889C 9.11223 3.88889 3.88889 9.11223 3.88889 15.5556C 3.88889 21.9989 9.11223 27.2222 15.5556 27.2222C 21.9989 27.2222 27.2222 21.9989 27.2222 15.5556C 27.2222 9.11223 21.9989 3.88889 15.5556 3.88889Z"/>
+</defs>
+</svg>

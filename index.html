@@ -6,13 +6,18 @@
 
 		<title>Wikipedia search</title>
 
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,600" rel="stylesheet">	
 
 	<style>
 
 		body {
 			background-image: url("img/Background_image.png");
 			background-size: cover;
-			background-repeat: no-repeat;
+			font-family: 'Montserrat', sans-serif;
+			background-color: #FAF9EE;
+			background-attachment: fixed;
+			height: 100vh;
+
 
 		}
 
@@ -21,13 +26,71 @@
 			font-size: 24px;
 			background-color: white;
 			padding: 8px 10px;
-			
+			border: none;
+			background-image: url('img/Searching.svg');
+    		background-repeat: no-repeat;
+    		background-position: right;
+    		background-size: 48px;
+    		margin: 20px 20px;
 		}
 
 		input::placeholder {
 			color: #E0E0E0;
 		}
+
+		input:focus {
+			outline: none;
+			border: 1px solid black;
+		}
+
+		a {
+			text-decoration: none;
+		}
+
+		.link:hover, #random:hover {
+			color: #5D5D5D;
+		}
+
+		.result {
+			width: 60%;
+			padding: 20px;
+			background-color: white;
+			border: 0px;
+			margin: 10px;
+		}
 		
+		.link {
+			color: #D38334;
+			font-size: 20px;
+			font-weight: 600;
+		}
+
+		.para {
+			font-size: 16px;
+		}
+
+		#random {
+			color: #D38334;
+			font-weight: 600;
+		}
+
+		.wordmark {
+			border-bottom: 2px solid black;
+			padding: 0px 0px 5px 0px;
+			font-weight: 600;
+			display: inline-block;
+			position: absolute;
+			left: 20px;
+			top: 20px;
+		}
+
+		.layout {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			height: 100%;
+		}
 
 	</style>	
 
@@ -35,9 +98,17 @@
 	
 	<body>
 		
+		<div class="wordmark">Search Wikipedia</div>
+
+		<div class="layout">
+
 		<input type="text" id="search" placeholder="What do you want to learn about?">
 
-		<a href="https://en.wikipedia.org/wiki/Special:Random"> Stuck? Go to a random article</a>
+		<a href="https://en.wikipedia.org/wiki/Special:Random" id="random"> Stuck? Go to a random article</a>
+
+		<div id="results"></div>
+
+		</div>
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -45,46 +116,58 @@
 
 	<script type="text/javascript">
 
-	// $(document).ready(function() {
-
-	// xhr.setRequestHeader( 'Api-User-Agent', 'Example/1.0' );
-
-
-	// Function to replace spaces with underscores 
-
-	var searchTerm = "Albert Einstein";
-
-	function spaceUnderscore() {
-		searchTerm = searchTerm.split(' ').join('%20');
-		console.log(searchTerm);
-
-	}
-
-	spaceUnderscore();
-
-	var sendToWiki = spaceUnderscore();
 
 	function getArticles() {
-		// searchTerm = document.getElementById("search").select();
+		var searchTerm = document.getElementById("search").value;
+
+		var sendToWiki = searchTerm.split(' ').join('%20');
+
+
+
 
 		$.getJSON("https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=" + sendToWiki + "&format=json&origin=*", function(a) {		
 
-		console.log(a);
+			console.log(a);
+
+		for (var x = 0; x <= 9; x++) {
+			var articleLink = a.query.search[x].title;
+			articleLink = articleLink.split(' ').join('%20');
+
+			var articleDiv = document.createElement('div');
+			articleDiv.className = "result";
+
+			var articleTitle = document.createElement('a');
+			articleTitle.innerHTML = a.query.search[x].title;
+			articleTitle.href = "https://en.wikipedia.org/wiki/" + articleLink;
+			articleTitle.className = "link";
+			articleDiv.appendChild(articleTitle);
+
+			var articleSnip = document.createElement('p');
+			articleSnip.innerHTML = a.query.search[x].snippet + "...";
+			articleSnip.className = "para";
+			articleDiv.appendChild(articleSnip);
+
+			var resultsList = document.getElementById('results'); 
+			resultsList.appendChild(articleDiv); 
+
+		}
+
+
 		});	
 	}
 	
-	getArticles();
+	document.querySelector('#search').addEventListener('keypress', function (e) {
+    var key = e.which || e.keyCode;
+    if (key === 13) { 
+      getArticles();
+    }
+	});
 
-		// When press enter, submit input
+	
+
 		// Move input field to top of screen
-		// TAKE INPUT BOX CONTENT AND add an underscore instead of spaces
-		// Send input box content as search string to wikipedia api
-		// Return object with excerpts of (10?) results
-		// Use forEach to loop through the object
-		// Add each as a div inside a parent div
-		// Make the template div link each to a URL of the article using https://en.wikipedia.org/wiki/ and name of article
+		// chamge search icon to clear icon
 
-	// });
 
 
 	</script>
