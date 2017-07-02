@@ -11,10 +11,10 @@
 	<style>
 
 		body {
-			background-image: url("img/Background_image.png");
+			background-image: url("img/Background.png");
 			background-size: cover;
 			font-family: 'Montserrat', sans-serif;
-			background-color: #FAF9EE;
+			background-color: #E4E4E4;
 			background-attachment: fixed;
 			height: 100vh;
 
@@ -48,7 +48,7 @@
 		}
 
 		.link:hover, #random:hover {
-			color: #5D5D5D;
+			color: #2E294E;
 		}
 
 		.result {
@@ -60,7 +60,7 @@
 		}
 		
 		.link {
-			color: #D38334;
+			color: #37279F;
 			font-size: 20px;
 			font-weight: 600;
 		}
@@ -70,7 +70,7 @@
 		}
 
 		#random {
-			color: #D38334;
+			color: #37279F;
 			font-weight: 600;
 		}
 
@@ -87,9 +87,22 @@
 		.layout {
 			display: flex;
 			flex-direction: column;
-			justify-content: center;
 			align-items: center;
 			height: 100%;
+		}
+
+		.defaultAlign {
+			justify-content: center;
+		}
+
+		#results {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.hidden {
+			display: none;
 		}
 
 	</style>	
@@ -100,7 +113,7 @@
 		
 		<div class="wordmark">Search Wikipedia</div>
 
-		<div class="layout">
+		<div id="layingOut" class="layout defaultAlign">
 
 		<input type="text" id="search" placeholder="What do you want to learn about?">
 
@@ -118,6 +131,7 @@
 
 
 	function getArticles() {
+
 		var searchTerm = document.getElementById("search").value;
 
 		var sendToWiki = searchTerm.split(' ').join('%20');
@@ -128,6 +142,9 @@
 		$.getJSON("https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=" + sendToWiki + "&format=json&origin=*", function(a) {		
 
 			console.log(a);
+
+			document.getElementById("layingOut").classList.remove("defaultAlign");
+
 
 		for (var x = 0; x <= 9; x++) {
 			var articleLink = a.query.search[x].title;
@@ -156,9 +173,17 @@
 		});	
 	}
 	
+	function clearList() {
+		var resultsList = document.getElementById('results'); 
+		resultsList.innerHTML = '';
+	}
+
+
 	document.querySelector('#search').addEventListener('keypress', function (e) {
     var key = e.which || e.keyCode;
     if (key === 13) { 
+      clearList();
+      document.getElementById("random").classList.add("hidden");
       getArticles();
     }
 	});
